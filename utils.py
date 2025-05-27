@@ -17,6 +17,11 @@ def load_survey_df(spark, data_file):
         .option("inferSchema", "true") \
         .csv(data_file)
 
+def load_flight_parquet_df(spark, data_file):
+    return spark.read \
+        .format("parquet") \
+        .load(data_file)
+
 def count_by_productId(survey_df):
     return survey_df \
         .where("quantitySold > 5") \
